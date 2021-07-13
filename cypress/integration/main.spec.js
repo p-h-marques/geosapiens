@@ -17,8 +17,38 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
     })
 
     it('validando cards corretos a serem exibidos', ()=>{
+        cy.get(locators.formBlocks.textField).should('exist')
+        cy.get(locators.formBlocks.textField).get('h2')
+            .should('contain', 'Nome do filme')
+
+        cy.get(locators.formBlocks.textField).get('p')
+            .should('contain', 'Nome original do filme')
+
     })
 
-    it('testando obrigatoriedade do textfield', ()=>{
+    it('testando obrigatoriedade do textfield (quando necessário)', ()=>{
+        cy.get(locators.formBlocks.textField).get('input').focus().blur()
+        cy.get(locators.formBlocks.textField).get('.error span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido!')
+
+        cy.get(locators.formBlocks.textField).get('input').type('Meu novo filme').blur()
+        cy.get(locators.formBlocks.textField).get('.error span')
+            .should('not.exist')
+
+        cy.get(locators.formBlocks.textField).get('[data-id=tooltip]')
+            .should('not.be.visible')
+
+        cy.get(locators.formBlocks.textField).get('.required img').trigger('mouseenter')
+
+        cy.get(locators.formBlocks.textField).get('[data-id=tooltip]')
+            .should('be.visible')
+
+        cy.get(locators.formBlocks.textField).get('.required img').trigger('mouseleave')
+
+        cy.get(locators.formBlocks.textField).get('[data-id=tooltip]')
+            .should('not.be.visible')
+
+
     })
 })

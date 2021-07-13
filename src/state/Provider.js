@@ -22,7 +22,7 @@ export const initialState = {
             options: null,
             minimum: {
                 type: 'FIXED',
-                value: 0
+                value: 1 //temp
             },
             maximum: 1,
             widget: null,
