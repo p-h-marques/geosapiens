@@ -3,6 +3,7 @@ import Context from '../../state/Context'
 import { FormStyles } from './styles'
 
 import FormInfo from '../../components/layout/formInfo'
+import FormActions from '../../components/layout/formActions'
 import ContainerBlock from '../../components/layout/formBlocks/containerBlock'
 import TextField from '../../components/layout/formBlocks/textField'
 import CheckboxField from '../../components/layout/formBlocks/checkboxField'
@@ -38,6 +39,8 @@ const Form = () => {
                     )
                 })
             }
+
+            <FormActions />
         </FormStyles>
     )
 }
