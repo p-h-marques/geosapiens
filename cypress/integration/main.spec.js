@@ -48,7 +48,5 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
         cy.get(locators.formBlocks.textField).get('[data-id=tooltip]')
             .should('not.be.visible')
-
-
     })
 })
