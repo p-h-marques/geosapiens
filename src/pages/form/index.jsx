@@ -3,27 +3,34 @@ import Context from '../../state/Context'
 import { FormStyles } from './styles'
 
 import FormInfo from '../../components/layout/formInfo'
+import ContainerBlock from '../../components/layout/formBlocks/containerBlock'
 import TextField from '../../components/layout/formBlocks/textField'
+// import CheckboxField from '../../components/layout/formBlocks/checkboxField'
 
 const Form = () => {
     const {state} = useContext(Context)
 
     function getTypeBlock(type, props) {
         const typesList = {
-            textfield: (<TextField key={props.componentId} {...props} />),
+            textfield: (<TextField key={props.componentId} {...props}/>),
+            checkboxfield: (<div key={props.componentId}>teste</div>),
+            // checkboxfield: (<CheckboxField key={props.componentId} />),
             default: (<div key={props.componentId}>olha o padrão</div>)
         }
 
         return typesList[type] || typesList['default']
     }
 
-
     return (
         <FormStyles>
             <FormInfo {...state.formInfo} />
             {
                 state.formStructure.map(block => {
-                    return getTypeBlock(block.type, block)
+                    return (
+                        <ContainerBlock key={block.componentId} {...block}>
+                            {getTypeBlock(block.type, block)}
+                        </ContainerBlock>
+                    )
                 })
             }
         </FormStyles>

@@ -1,15 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import ReactTooltip from 'react-tooltip'
+import React, {useCallback, useState} from 'react'
 import { TextFieldStyles } from './styles'
-import ImgRequired from '../../../../assets/images/required.svg'
 
 const TextField = (props) => {
     const [error, setError] = useState(false)
     const [input, setInput] = useState('')
-
-    useEffect(()=>{
-        console.log(props)
-    }, [])
 
     const handleInputError = useCallback(()=>{
         if(input.length === 0) setError(true)
@@ -21,29 +15,13 @@ const TextField = (props) => {
     }, [input])
 
     return (
-        <TextFieldStyles data-test={'form-block-' + props.type}>
-            <div className="labels">
-                <div className="titles">
-                    <h2>{props.label}</h2>
-                    <p>{props.helpBlock}</p>
-                </div>
+        <TextFieldStyles data-test={'form-block-' + props.type}
+            className={error ? 'error' : null}>
 
-                {
-                    !!props.minimum.value && (
-                        <div className="required">
-                            <img src={ImgRequired} alt="Atributo obrigatório!"
-                                data-tip="Atributo obrigatório!"/>
-                            <ReactTooltip />
-                        </div>
-                    )
-                }
-            </div>
+            <input type="text" onBlur={handleInputError}
+                value={input} onChange={e => {handleInputChange(e.target.value)}}/>
+            <span>Este campo precisa ser preenchido!</span>
 
-            <div className={error ? 'actions error' : 'actions'}>
-                <input type="text" onBlur={handleInputError}
-                    value={input} onChange={e => {handleInputChange(e.target.value)}}/>
-                <span>Este campo precisa ser preenchido!</span>
-            </div>
         </TextFieldStyles>
     )
 }
