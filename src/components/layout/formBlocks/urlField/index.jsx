@@ -10,7 +10,7 @@ const UrlField = props => {
     const handleInputError = useCallback(() => {
         if (
             (input.length === 0 && props.minimum.value === 1) ||
-            !validURL(input)
+            (input.length !== 0 && !validURL(input))
         ){
             setError(true)
         }

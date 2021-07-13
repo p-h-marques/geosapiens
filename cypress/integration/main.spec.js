@@ -62,6 +62,9 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.clearButton).should('exist').should('contain', 'Limpar')
         cy.get(locators.formBlocks.sendButton).should('exist').should('contain', 'Enviar')
 
+        cy.get(locators.formBlocks.footer).should('exist')
+            .should('contain', 'Pedro Henrique')
+
     })
 
     it.skip('testando obrigatoriedade do textfield (quando necessário)', ()=>{
@@ -121,9 +124,9 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
     it('testando funcionalidade do campo de URL', ()=>{
         cy.get(locators.formBlocks.urlField + ' input').focus().blur()
-        cy.get(locators.formBlocks.urlField + ' .error span')
-            .should('be.visible')
-            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+        // cy.get(locators.formBlocks.urlField + ' .error span')
+        //     .should('be.visible')
+        //     .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
 
         cy.get(locators.formBlocks.urlField + ' input').type('url inválida').blur()
         cy.get(locators.formBlocks.urlField + ' .error span')
