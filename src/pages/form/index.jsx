@@ -5,7 +5,7 @@ import { FormStyles } from './styles'
 import FormInfo from '../../components/layout/formInfo'
 import ContainerBlock from '../../components/layout/formBlocks/containerBlock'
 import TextField from '../../components/layout/formBlocks/textField'
-// import CheckboxField from '../../components/layout/formBlocks/checkboxField'
+import CheckboxField from '../../components/layout/formBlocks/checkboxField'
 
 const Form = () => {
     const {state} = useContext(Context)
@@ -13,8 +13,7 @@ const Form = () => {
     function getTypeBlock(type, props) {
         const typesList = {
             textfield: (<TextField key={props.componentId} {...props}/>),
-            checkboxfield: (<div key={props.componentId}>teste</div>),
-            // checkboxfield: (<CheckboxField key={props.componentId} />),
+            checkboxfield: (<CheckboxField key={props.componentId} {...props}/>),
             default: (<div key={props.componentId}>olha o padrão</div>)
         }
 

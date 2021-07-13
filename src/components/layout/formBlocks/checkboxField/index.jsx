@@ -1,12 +1,18 @@
 import React from 'react'
-// import ReactTooltip from 'react-tooltip'
 import { CheckboxFieldStyles } from './styles'
-// import ImgRequired from '../../../../assets/images/required.svg'
 
 const CheckboxField = (props) => {
     return (
         <CheckboxFieldStyles data-test={'form-block-' + props.type}>
-            <div>oi bb</div>
+            {
+                props.options.map((option) => (
+                    <div key={option} data-test="form-check">
+                        <input type="checkbox" value={option}
+                            id={option}/>
+                        <label htmlFor={option}>{option}</label>
+                    </div>
+                ))
+            }
         </CheckboxFieldStyles>
     )
 }

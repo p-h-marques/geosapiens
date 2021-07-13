@@ -10,7 +10,8 @@ const locators = {
         public: '[data-test=form-title-public]',
     },
     formBlocks: {
-        textField: '[data-test=form-block-textfield]'
+        textField: '[data-test=form-block-textfield]',
+        checkboxField: '[data-test=form-block-checkboxfield]',
     }
 }
 

@@ -4,9 +4,6 @@ import { ContainerBlockStyles } from './styles'
 import ImgRequired from '../../../../assets/images/required.svg'
 
 const ContainerBlock = (props) => {
-
-    console.log(props)
-
     return (
         <ContainerBlockStyles data-test={'form-block-' + props.type}>
             <div className="labels">
