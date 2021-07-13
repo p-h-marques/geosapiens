@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 import colors from '../../../styles/colors'
 import measures from '../../../styles/measures'
+import {Block} from '../../../styles/containers'
 
-export const FormInfoStyles = styled.section`
-    background: ${colors.light};
-    width: 800px;
-    border-radius: ${measures[1]};
-    padding: ${measures[5]};
+export const FormInfoStyles = styled(Block)`
     border-bottom: ${measures[1]} solid ${colors.dark};
 
     h1{
@@ -42,15 +39,7 @@ export const FormInfoStyles = styled.section`
         color: ${colors.danger};
     }
 
-    @media(max-width: 991px){
-        width: 100%;
-        margin: 0px ${measures[5]};
-    }
-
     @media(max-width: 575px){
-        width: 100%;
-        margin: 0px ${measures[2]};
-
         div.details{
             flex-direction: column;
             align-items: flex-start;

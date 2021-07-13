@@ -18,4 +18,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
     it('validando cards corretos a serem exibidos', ()=>{
     })
+
+    it('testando obrigatoriedade do textfield', ()=>{
+    })
 })

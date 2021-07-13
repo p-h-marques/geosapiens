@@ -1,19 +1,16 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import Context from '../../state/Context'
 import { FormStyles } from './styles'
 
 import FormInfo from '../../components/layout/formInfo'
+import TextField from '../../components/layout/formBlocks/textField'
 
 const Form = () => {
-    const {state, dispatch} = useContext(Context)
-
-    useEffect(()=>{
-        console.log(state.formStructure)
-    }, [state, dispatch])
+    const {state} = useContext(Context)
 
     function getTypeBlock(type, props) {
         const typesList = {
-            textfield: (<div key={props.componentId}>olha o texto</div>),
+            textfield: (<TextField key={props.componentId} {...props} />),
             default: (<div key={props.componentId}>olha o padrão</div>)
         }
 
@@ -24,7 +21,6 @@ const Form = () => {
     return (
         <FormStyles>
             <FormInfo {...state.formInfo} />
-
             {
                 state.formStructure.map(block => {
                     return getTypeBlock(block.type, block)
