@@ -12,6 +12,8 @@ import CheckboxField from '../../components/layout/formBlocks/checkboxField'
 import RatingField from '../../components/layout/formBlocks/ratingField'
 import DateField from '../../components/layout/formBlocks/dateField'
 import UrlField from '../../components/layout/formBlocks/urlField'
+import Loading from '../../components/layout/loading'
+import Error from '../../components/layout/error'
 
 const Form = () => {
     const {state, dispatch} = useContext(Context)
@@ -41,9 +43,9 @@ const Form = () => {
 
     return (
         <FormStyles>
-            {state.appStatus.loading && (<div>Carregando...</div>)}
+            {state.appStatus.loading && (<Loading />)}
 
-            {state.appStatus.error && (<div>Erro!</div>)}
+            {state.appStatus.error && (<Error />)}
 
             {
                 !state.appStatus.loading &&
