@@ -39,4 +39,22 @@ export const HeaderStyles = styled.header`
             }
         }
     }
+
+    @media(max-width: 575px){
+        div.logo{
+            background-color: ${colors.light};
+            height: 100%;
+            padding: 0px ${measures[2]};
+            display: flex;
+        }
+
+        nav{
+            padding: 0px ${measures[1]};
+            display: flex;
+
+            a, span {
+                padding: 0px ${measures[1]};
+            }
+        }
+    }
 `

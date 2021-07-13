@@ -1,15 +1,8 @@
 /// <reference types="cypress" />
 
-import colors from '../../src/styles/colors'
-
 const domain = 'http://localhost:3000'
 
-const locators = {
-    links: {
-        insert: '[data-test=nav_link_0]',
-        read: '[data-test=nav_link_1]',
-    }
-}
+import locators from '../support/locators'
 
 describe('validando navegação entre páginas', ()=>{
     it('visitando domínio principal e redirecionando para adição de registro', ()=>{
@@ -36,19 +29,4 @@ describe('validando navegação entre páginas', ()=>{
 
         cy.url().should('contain', 'insert')
     })
-
-    /*
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    it('', ()=>{})
-    */
 })

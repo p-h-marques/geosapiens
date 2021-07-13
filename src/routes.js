@@ -2,6 +2,7 @@ import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
 import Container from './components/layout/container'
+import Form from './pages/form'
 import './reset.css'
 
 function RoutesList() {
@@ -9,7 +10,7 @@ function RoutesList() {
         <Container>
             <Switch>
                 <Route exact path="/insert">
-                    <div>adicionar</div>
+                    <Form />
                 </Route>
 
                 <Route exact path="/read">

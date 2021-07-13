@@ -1,16 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { ContainerStyles } from './styles'
 
-import Context from '../../../state/Context'
 import Header from '../header'
 
-const Start = (props) => {
-    const { state } = useContext(Context)
-
-    useEffect(() => {
-        console.log(state)
-    }, [state])
-
+const Container = (props) => {
     return (
         <ContainerStyles>
             <Header />
@@ -19,4 +12,4 @@ const Start = (props) => {
     )
 }
 
-export default Start
+export default Container

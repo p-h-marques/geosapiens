@@ -3,10 +3,12 @@
     src: local('ProximaNova'), url(./assets/fonts/ProximaNova-Regular.otf);
 } */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 * {
     text-decoration: none;
     box-sizing: border-box;
-    line-height: 1rem;
+    line-height: 100%;
     padding: 0px;
     margin: 0px;
 }
@@ -15,7 +17,7 @@ body {
     height: 100vh;
     padding: 0px;
     margin: 0px;
-    font-family: 'ProximaNova', sans-serif;
+    font-family: 'Roboto', sans-serif;
     min-width: 360px;
     background: #FBFBFB;
     color: #1F2D30;
