@@ -14,6 +14,8 @@ const locators = {
         checkboxField: '[data-test=form-block-checkboxfield]',
         ratingField: '[data-test=form-block-ratingfield]',
         ratingFieldText: '[data-test=form-block-ratingfield] span.feedback',
+        dateField: '[data-test=form-block-datefield]',
+        dateFieldPopup: '.react-datepicker__tab-loop'
     }
 }
 

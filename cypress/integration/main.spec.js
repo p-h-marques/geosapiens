@@ -2,7 +2,15 @@
 
 import locators from '../support/locators'
 import { feedbacks } from '../../src/components/layout/formBlocks/ratingField'
+
 const domain = 'http://localhost:3000'
+
+const localeDateOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    timeZone: 'UTC'
+}
 
 describe('exibindo informações do formulário para preenchimento', ()=>{
     it('visitando página', ()=>{
@@ -34,7 +42,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
     })
 
-    it('testando obrigatoriedade do textfield (quando necessário)', ()=>{
+    it.skip('testando obrigatoriedade do textfield (quando necessário)', ()=>{
         cy.get(locators.formBlocks.textField + ' input').focus().blur()
         cy.get(locators.formBlocks.textField + ' .error span')
             .should('be.visible')
@@ -58,7 +66,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
             .should('not.be.visible')
     })
 
-    it('testando funcionalidade dos checkboxes', ()=>{
+    it.skip('testando funcionalidade dos checkboxes', ()=>{
         cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input').each($el => {
             cy.wrap($el).click()
             cy.wrap($el).click()
@@ -75,5 +83,17 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
                 cy.get(locators.formBlocks.ratingFieldText)
                     .should('contain', feedbacks[key + 1])
             })
+    })
+
+    it('testando funcionalidade da seleção de data', ()=>{
+        const date = new Date().toLocaleDateString('pt-BR', localeDateOptions)
+
+        cy.get(locators.formBlocks.dateField + ' .react-datepicker__input-container span')
+            .should('contain', date)
+
+        cy.get(locators.formBlocks.dateField + ' .react-datepicker__input-container span').click()
+        cy.get(locators.formBlocks.dateFieldPopup).should('exist')
+        cy.get('body').click()
+        cy.get(locators.formBlocks.dateFieldPopup).should('not.exist')
     })
 })
