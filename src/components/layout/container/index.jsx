@@ -8,6 +8,7 @@ const Container = (props) => {
         <ContainerStyles>
             <Header />
             {props.children}
+            <footer>footer</footer>
         </ContainerStyles>
     )
 }

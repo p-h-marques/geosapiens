@@ -8,12 +8,13 @@ export const FormStyles = styled.main`
     align-items: center;
     justify-content: center;
     margin-top: ${measures[5]};
+    margin-bottom: 80px;
 
     @media(max-width: 991px){
-        margin: ${measures[5]} ${measures[5]} 0px ${measures[5]};
+        margin: ${measures[5]} ${measures[5]} 80px ${measures[5]};
     }
 
     @media(max-width: 575px){
-        margin: ${measures[5]} ${measures[2]} 0px ${measures[2]};
+        margin: ${measures[5]} ${measures[2]} 80px ${measures[2]};
     }
 `
