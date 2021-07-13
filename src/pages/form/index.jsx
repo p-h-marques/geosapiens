@@ -31,25 +31,46 @@ const Form = () => {
 
     useEffect(async ()=>{
         const initialData = await getInitialData()
-        dispatch(await actions.updateInitialData(initialData))
+
+        if(initialData){
+            dispatch(await actions.updateInitialData(initialData))
+        } else {
+            dispatch(actions.handleErrorStatus(true))
+        }
     }, [])
 
     return (
         <FormStyles>
             {state.appStatus.loading && (<div>Carregando...</div>)}
 
-            <FormInfo {...state.formInfo} />
+            {state.appStatus.error && (<div>Erro!</div>)}
+
+            {
+                !state.appStatus.loading &&
+                !state.appStatus.error &&
+                (<FormInfo {...state.formInfo} />)
+            }
+
             {
                 state.formStructure.map(block => {
-                    return (
-                        <ContainerBlock key={block.componentId} {...block}>
-                            {getTypeBlock(block.type, block)}
-                        </ContainerBlock>
-                    )
+                    if(
+                        !state.appStatus.loading &&
+                        !state.appStatus.error
+                    ){
+                        return (
+                            <ContainerBlock key={block.componentId} {...block}>
+                                {getTypeBlock(block.type, block)}
+                            </ContainerBlock>
+                        )
+                    }
                 })
             }
 
-            <FormActions />
+            {
+                !state.appStatus.loading &&
+                !state.appStatus.error &&
+                (<FormActions />)
+            }
         </FormStyles>
     )
 }

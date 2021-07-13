@@ -6,8 +6,9 @@ export async function getFormInfo(){
     const request = await fetch(formInfoUrl)
     if(request.status !== 200) return false
 
-    const response = await request.json()
-    return response
+    // const response = await request.json()
+    // return response
+    return false
 }
 
 export async function getFormStructure(){
@@ -33,4 +34,6 @@ export async function getInitialData(){
             formStructure
         }
     }
+
+    return false
 }

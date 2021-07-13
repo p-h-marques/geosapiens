@@ -4,6 +4,8 @@ import measures from '../../styles/measures'
 export const FormStyles = styled.main`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0px;
     gap: ${measures[2]};
     align-items: center;
     justify-content: center;

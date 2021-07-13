@@ -18,6 +18,15 @@ function reducer(state, action) {
                 }
             }
 
+        case types.HANDLE_ERROR_STATUS:
+            return {
+                ...state,
+                appStatus: {
+                    loading: action.payload ? false : state.appStatus.loading,
+                    error: action.payload
+                }
+            }
+
         default:
             throw new Error()
     }

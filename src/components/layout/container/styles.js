@@ -5,4 +5,6 @@ export const ContainerStyles = styled.div`
     min-height: 100vh;
     background-color: ${colors.background};
     color: ${colors.dark};
+    display: flex;
+    flex-direction: column;
 `

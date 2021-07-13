@@ -19,3 +19,10 @@ export async function updateInitialData(data){
         payload: { ...data}
     }
 }
+
+export function handleErrorStatus(data){
+    return {
+        type: types.HANDLE_ERROR_STATUS,
+        payload: data,
+    }
+}
