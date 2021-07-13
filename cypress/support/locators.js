@@ -12,6 +12,8 @@ const locators = {
     formBlocks: {
         textField: '[data-test=form-block-textfield]',
         checkboxField: '[data-test=form-block-checkboxfield]',
+        ratingField: '[data-test=form-block-ratingfield]',
+        ratingFieldText: '[data-test=form-block-ratingfield] span.feedback',
     }
 }
 

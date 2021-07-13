@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import locators from '../support/locators'
+import { feedbacks } from '../../src/components/layout/formBlocks/ratingField'
 const domain = 'http://localhost:3000'
 
 describe('exibindo informações do formulário para preenchimento', ()=>{
@@ -62,5 +63,17 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
             cy.wrap($el).click()
             cy.wrap($el).click()
         })
+    })
+
+    it('testando funcionalidade da seleção de nota', ()=>{
+        cy.get(locators.formBlocks.ratingFieldText)
+            .should('contain', feedbacks[0])
+
+        cy.get(locators.formBlocks.ratingField + ' div.react-stars span')
+            .each(($el, key) => {
+                cy.wrap($el).click()
+                cy.get(locators.formBlocks.ratingFieldText)
+                    .should('contain', feedbacks[key + 1])
+            })
     })
 })
