@@ -6,7 +6,7 @@ const TextField = (props) => {
     const [input, setInput] = useState('')
 
     const handleInputError = useCallback(()=>{
-        if(input.length === 0) setError(true)
+        if(input.length === 0 && props.minimum.value === 1) setError(true)
     }, [input])
 
     const handleInputChange = useCallback(text =>{
@@ -20,7 +20,7 @@ const TextField = (props) => {
 
             <input type="text" onBlur={handleInputError}
                 value={input} onChange={e => {handleInputChange(e.target.value)}}/>
-            <span>Este campo precisa ser preenchido!</span>
+            <span>Este campo precisa ser preenchido corretamente!</span>
 
         </TextFieldStyles>
     )

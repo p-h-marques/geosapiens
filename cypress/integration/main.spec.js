@@ -42,11 +42,11 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
     })
 
-    it.skip('testando obrigatoriedade do textfield (quando necessário)', ()=>{
+    it('testando obrigatoriedade do textfield (quando necessário)', ()=>{
         cy.get(locators.formBlocks.textField + ' input').focus().blur()
         cy.get(locators.formBlocks.textField + ' .error span')
             .should('be.visible')
-            .should('contain', 'Este campo precisa ser preenchido!')
+            .should('contain', 'Este campo precisa ser preenchido corretamente!')
 
         cy.get(locators.formBlocks.textField + ' input').type('Meu novo filme').blur()
         cy.get(locators.formBlocks.textField + ' .error span')
@@ -55,6 +55,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
             .should('not.be.visible')
 
+        /*
         cy.get(locators.formBlocks.textField + ' .required img').trigger('mouseenter')
 
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
@@ -64,9 +65,10 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
             .should('not.be.visible')
+        */
     })
 
-    it.skip('testando funcionalidade dos checkboxes', ()=>{
+    it('testando funcionalidade dos checkboxes', ()=>{
         cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input').each($el => {
             cy.wrap($el).click()
             cy.wrap($el).click()
@@ -95,5 +97,21 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.dateFieldPopup).should('exist')
         cy.get('body').click()
         cy.get(locators.formBlocks.dateFieldPopup).should('not.exist')
+    })
+
+    it('testando funcionalidade do campo de URL', ()=>{
+        cy.get(locators.formBlocks.urlField + ' input').focus().blur()
+        cy.get(locators.formBlocks.urlField + ' .error span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+
+        cy.get(locators.formBlocks.urlField + ' input').type('url inválida').blur()
+        cy.get(locators.formBlocks.urlField + ' .error span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+
+        cy.get(locators.formBlocks.urlField + ' input').type('{selectAll}google.com').blur()
+        cy.get(locators.formBlocks.urlField + ' .error span')
+            .should('not.exist')
     })
 })
