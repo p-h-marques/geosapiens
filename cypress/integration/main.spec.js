@@ -2,6 +2,7 @@
 
 import locators from '../support/locators'
 import { feedbacks } from '../../src/components/layout/formBlocks/ratingField'
+import { formInfoUrl } from '../../src/utils/requests'
 
 const domain = 'http://localhost:3000'
 
@@ -13,7 +14,7 @@ const localeDateOptions = {
 }
 
 describe('exibindo informações do formulário para preenchimento', ()=>{
-    it('visitando página', ()=>{
+    beforeEach(()=>{
         cy.visit(domain)
         cy.url().should('contain', 'insert')
     })
@@ -63,7 +64,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
     })
 
-    it('testando obrigatoriedade do textfield (quando necessário)', ()=>{
+    it.skip('testando obrigatoriedade do textfield (quando necessário)', ()=>{
         cy.get(locators.formBlocks.textField + ' input').focus().blur()
         cy.get(locators.formBlocks.textField + ' .error span')
             .should('be.visible')
@@ -76,7 +77,6 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
             .should('not.be.visible')
 
-        /*
         cy.get(locators.formBlocks.textField + ' .required img').trigger('mouseenter')
 
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
@@ -86,7 +86,6 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
 
         cy.get(locators.formBlocks.textField + ' [data-id=tooltip]')
             .should('not.be.visible')
-        */
     })
 
     it('testando funcionalidade dos checkboxes', ()=>{
@@ -134,5 +133,24 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.urlField + ' input').type('{selectAll}google.com').blur()
         cy.get(locators.formBlocks.urlField + ' .error span')
             .should('not.exist')
+    })
+
+    it('testando feedbacks de carregamento', ()=>{
+        cy.get(locators.feedbacks.loading).should('exist')
+        cy.get(locators.formInfos.title).should('contain', 'Filmes Preferidos')
+        cy.get(locators.feedbacks.loading).should('not.exist')
+    })
+
+    it('testando feedback de erro', ()=>{
+        cy.intercept('https://coletum.com/api/graphql?*', {
+            statusCode: 500
+        }).as('request')
+
+        cy.visit(domain)
+        cy.url().should('contain', 'insert')
+
+        cy.get(locators.feedbacks.loading).should('exist')
+        cy.wait('@request')
+        cy.get(locators.feedbacks.error).should('exist')
     })
 })

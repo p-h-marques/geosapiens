@@ -19,6 +19,10 @@ const locators = {
         urlField: '[data-test=form-block-urlfield]',
         clearButton: '[data-test=button-clear]',
         sendButton: '[data-test=button-send]',
+    },
+    feedbacks: {
+        loading: '[data-test=request-loading]',
+        error: '[data-test=request-error]',
     }
 }
 

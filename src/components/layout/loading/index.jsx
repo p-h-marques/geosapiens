@@ -5,7 +5,7 @@ import ImgLoading from '../../../assets/images/loading.svg'
 
 const Loading = () => {
     return (
-        <LoadingStyles>
+        <LoadingStyles data-test="request-loading">
             <img src={ImgLoading} alt="Carregando..." />
             <div>Carregando informações do formulário...</div>
         </LoadingStyles>
