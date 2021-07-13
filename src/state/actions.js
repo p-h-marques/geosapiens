@@ -12,3 +12,10 @@ export function simpleUpdate(data){
         payload: data,
     }
 }
+
+export async function updateInitialData(data){
+    return {
+        type: types.UPDATE_INITIAL_DATA,
+        payload: { ...data}
+    }
+}

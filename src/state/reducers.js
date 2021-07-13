@@ -4,10 +4,17 @@ function reducer(state, action) {
     switch (action.type) {
         case types.SIMPLE_UPDATE:
             return {
+                ...state
+            }
+
+        case types.UPDATE_INITIAL_DATA:
+            return {
                 ...state,
-                main: {
-                    ...state.main,
-                    data: action.payload
+                formInfo: {...action.payload.formInfo},
+                formStructure: [...action.payload.formStructure],
+                appStatus: {
+                    ...state.appStatus,
+                    loading: false
                 }
             }
 
