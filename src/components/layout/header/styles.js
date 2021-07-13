@@ -32,10 +32,12 @@ export const HeaderStyles = styled.header`
 
             &:hover, &:active{
                 color: ${colors.highlight};
+                text-decoration: underline;
             }
 
-            &.active{
-                color: ${colors.medium}
+            &.active, &.active:hover{
+                color: ${colors.highlight};
+                text-decoration: unset;
             }
         }
     }
