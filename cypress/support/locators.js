@@ -17,6 +17,8 @@ const locators = {
         dateField: '[data-test=form-block-datefield]',
         dateFieldPopup: '.react-datepicker__tab-loop',
         urlField: '[data-test=form-block-urlfield]',
+        clearButton: '[data-test=button-clear]',
+        sendButton: '[data-test=button-send]',
     }
 }
 

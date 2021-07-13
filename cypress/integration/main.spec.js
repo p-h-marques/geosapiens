@@ -40,6 +40,27 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.formBlocks.checkboxField + ' p')
             .should('contain', 'Em quais categorias o filme se encaixa')
 
+        cy.get(locators.formBlocks.ratingField).should('exist')
+        cy.get(locators.formBlocks.ratingField + ' h2')
+            .should('contain', 'Avaliação pessoal')
+
+        cy.get(locators.formBlocks.ratingField + ' p')
+            .should('contain', 'O que você achou do filme?')
+
+        cy.get(locators.formBlocks.dateField).should('exist')
+        cy.get(locators.formBlocks.dateField + ' h2')
+            .should('contain', 'Data de lançamento')
+
+        cy.get(locators.formBlocks.urlField).should('exist')
+        cy.get(locators.formBlocks.urlField + ' h2')
+            .should('contain', 'URL para o site do do IMDB com informações sobre o filme')
+
+        cy.get(locators.formBlocks.urlField + ' p')
+            .should('contain', 'https://www.imdb.com/')
+
+        cy.get(locators.formBlocks.clearButton).should('exist').should('contain', 'Limpar')
+        cy.get(locators.formBlocks.sendButton).should('exist').should('contain', 'Enviar')
+
     })
 
     it('testando obrigatoriedade do textfield (quando necessário)', ()=>{
