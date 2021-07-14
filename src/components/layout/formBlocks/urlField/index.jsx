@@ -1,27 +1,35 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import { UrlFieldStyles } from './styles'
 
 import {validURL} from '../../../../utils/validations'
 
+import Context from '../../../../state/Context'
+import * as actions from '../../../../state/actions'
+
 const UrlField = props => {
     const [error, setError] = useState(false)
-    const [input, setInput] = useState('')
+
+    const {state, dispatch} = useContext(Context)
 
     const handleInputError = useCallback(() => {
-        if (
-            (input.length === 0 && props.minimum.value === 1) ||
-            (input.length !== 0 && !validURL(input))
-        ){
+        if ((
+            state.formAnswer[props.componentId].length === 0 &&
+            props.minimum.value === 1
+        ) || (
+            state.formAnswer[props.componentId].length !== 0 &&
+            !validURL(state.formAnswer[props.componentId])
+        )){
             setError(true)
         }
-    }, [input])
+
+    }, [state.formAnswer[props.componentId]])
 
     const handleInputChange = useCallback(
         text => {
             setError(false)
-            setInput(text)
+            dispatch(actions.updateFormAnswer(text, props.componentId))
         },
-        [input],
+        [state.formAnswer[props.componentId]],
     )
 
     return (
@@ -32,7 +40,7 @@ const UrlField = props => {
             <input
                 type="text"
                 onBlur={handleInputError}
-                value={input}
+                value={state.formAnswer[props.componentId]}
                 onChange={e => {
                     handleInputChange(e.target.value)
                 }}
