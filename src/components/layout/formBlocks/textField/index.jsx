@@ -7,7 +7,6 @@ import * as actions from '../../../../state/actions'
 const TextField = (props) => {
     const {state, dispatch} = useContext(Context)
     const [error, setError] = useState(false)
-    // const [input, setInput] = useState('')
 
     const input = state.formAnswer[props.componentId]
 
@@ -17,7 +16,6 @@ const TextField = (props) => {
 
     const handleInputChange = useCallback(text =>{
         setError(false)
-        // setInput(text)
         dispatch(actions.updateFormAnswer(text, props.componentId))
     }, [input])
 
