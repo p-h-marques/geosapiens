@@ -50,12 +50,12 @@ function getComponentsId(structure){
 
 export function getDefaultValues(type){
     const typesList = {
-        textfield:     ' ',
+        textfield:     '',
         checkboxfield: [],
         ratingfield:   3,
         datefield:     new Date(),
-        urlfield:      ' ',
-        default:       null
+        urlfield:      '',
+        default:       ''
     }
 
     return typesList[type] || typesList['default']

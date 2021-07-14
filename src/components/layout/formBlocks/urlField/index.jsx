@@ -11,10 +11,10 @@ const UrlField = props => {
 
     const handleInputError = useCallback(() => {
         if ((
-            state.formAnswer[props.componentId].trim().length === 0 &&
+            state.formAnswer[props.componentId].length === 0 &&
             props.minimum.value === 1
         ) || (
-            state.formAnswer[props.componentId].trim().length !== 0 &&
+            state.formAnswer[props.componentId].length !== 0 &&
             !validURL(state.formAnswer[props.componentId])
         )){
             dispatch(actions.updateFormError(props.componentId, true))
@@ -38,7 +38,7 @@ const UrlField = props => {
             <input
                 type="text"
                 onBlur={handleInputError}
-                value={state.formAnswer[props.componentId].trim()}
+                value={state.formAnswer[props.componentId]}
                 onChange={e => {
                     handleInputChange(e.target.value)
                 }}

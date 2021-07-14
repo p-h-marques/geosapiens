@@ -8,7 +8,7 @@ const TextField = (props) => {
     const {state, dispatch} = useContext(Context)
 
     const handleInputError = useCallback(()=>{
-        if(state.formAnswer[props.componentId].trim().length === 0 && props.minimum.value === 1){
+        if(state.formAnswer[props.componentId].length === 0 && props.minimum.value === 1){
             dispatch(actions.updateFormError(props.componentId, true))
         }
     }, [state.formAnswer[props.componentId]])
@@ -25,7 +25,7 @@ const TextField = (props) => {
             <input
                 type="text"
                 onBlur={handleInputError}
-                value={state.formAnswer[props.componentId].trim()}
+                value={state.formAnswer[props.componentId]}
                 onChange={e => {handleInputChange(e.target.value)}}
             />
             <span>Este campo precisa ser preenchido corretamente!</span>

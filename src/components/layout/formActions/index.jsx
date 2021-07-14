@@ -28,7 +28,7 @@ const FormActions = () => {
     const handleApplyButton = useCallback(()=>{
         function getRequiredFields(structure){
             return structure.filter(field => {
-                return field.minimum.value === 0
+                return field.minimum.value === 0 && field.type !== 'ratingfield'
             })
         }
 
@@ -55,10 +55,12 @@ const FormActions = () => {
          * - criar objeto para salvar
          * - exibir alerta
          */
+
         const requireds = getRequiredFields(state.formStructure)
         const alerts = assertRequiredFields(requireds, state.formAnswer)
-        console.log(alerts)
-    }, [])
+
+        alerts.forEach(alert => console.log(alert))
+    }, [state.formAnswer])
 
     return (
         <FormActionsStyles>
