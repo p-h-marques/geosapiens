@@ -1,8 +1,6 @@
 import * as types from './types'
 
 function reducer(state, action) {
-    console.log(action)
-
     switch (action.type) {
         case types.UPDATE_INITIAL_DATA:
             return {

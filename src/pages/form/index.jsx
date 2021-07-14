@@ -42,7 +42,7 @@ const Form = () => {
     }, [])
 
     useEffect(()=>{
-        console.log(state)
+        // console.log(state)
     }, [state])
 
     return (

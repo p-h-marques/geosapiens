@@ -3,6 +3,7 @@ export const formStructureUrl = 'https://coletum.com/api/graphql?query=%7Bform_s
 
 export async function getFormInfo(){
     const request = await fetch(formInfoUrl)
+    console.log(request)
     if(request.status !== 200) return false
 
     const response = await request.json()
@@ -11,6 +12,7 @@ export async function getFormInfo(){
 
 export async function getFormStructure(){
     const request = await fetch(formStructureUrl)
+    console.log(request)
     if(request.status !== 200) return false
 
     const response = await request.json()
