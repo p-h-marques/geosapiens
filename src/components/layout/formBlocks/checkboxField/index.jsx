@@ -14,7 +14,6 @@ const CheckboxField = (props) => {
             newData.push(option)
 
         } else {
-            const newData = [...state.formAnswer[props.componentId]]
             const index = newData.indexOf(option)
             if (index > -1) newData.splice(index, 1)
         }
@@ -25,20 +24,29 @@ const CheckboxField = (props) => {
 
     return (
         <CheckboxFieldStyles data-test={'form-block-' + props.type}>
-            {
-                props.options.map((option) => (
-                    <div key={option} data-test="form-check">
-                        <input
-                            type="checkbox"
-                            value={option}
-                            id={option}
-                            checked={state.formAnswer[props.componentId].includes(option)}
-                            onChange={(e)=>{handleSelectCheckbox(option, e.target.checked)}}
-                        />
-                        <label htmlFor={option}>{option}</label>
-                    </div>
-                ))
-            }
+            <div className="grid">
+                {
+                    props.options.map((option) => (
+                        <div key={option} data-test="form-check">
+                            <input
+                                type="checkbox"
+                                value={option}
+                                id={option}
+                                checked={state.formAnswer[props.componentId].includes(option)}
+                                onChange={(e)=>{handleSelectCheckbox(option, e.target.checked)}}
+                            />
+                            <label htmlFor={option}>{option}</label>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div className="errors">
+                {
+                    state.formErrors[props.componentId] &&
+                    (<span>Pelo menos uma seleção deve ser feita!</span>)
+                }
+            </div>
         </CheckboxFieldStyles>
     )
 }

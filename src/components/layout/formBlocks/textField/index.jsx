@@ -8,7 +8,7 @@ const TextField = (props) => {
     const {state, dispatch} = useContext(Context)
 
     const handleInputError = useCallback(()=>{
-        if(state.formAnswer[props.componentId].trim().length === 0 && props.minimum.value === 0){
+        if(state.formAnswer[props.componentId].trim().length === 0 && props.minimum.value === 1){
             dispatch(actions.updateFormError(props.componentId, true))
         }
     }, [state.formAnswer[props.componentId]])
