@@ -41,6 +41,10 @@ const Form = () => {
         }
     }, [])
 
+    useEffect(()=>{
+        console.log(state.formAnswer)
+    }, [state.formAnswer])
+
     return (
         <FormStyles>
             {state.appStatus.loading && (<Loading />)}

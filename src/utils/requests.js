@@ -26,12 +26,37 @@ export async function getInitialData(){
     if(requests[0] && requests[1]){
         const formInfo = {...requests[0].data.form[0]}
         const formStructure = [...requests[1].data.form_structure]
+        const formAnswer = getComponentsId(formStructure)
 
         return {
             formInfo,
-            formStructure
+            formStructure,
+            formAnswer
         }
     }
 
     return false
+}
+
+function getComponentsId(structure){
+    let answers = {}
+
+    structure.forEach(field => {
+        answers[field.componentId] = getDefaultValues(field.type)
+    })
+
+    return answers
+}
+
+function getDefaultValues(type){
+    const typesList = {
+        textfield:     ' ',
+        checkboxfield: [],
+        ratingfield:   3,
+        datefield:     new Date(),
+        urlfield:      ' ',
+        default:       null
+    }
+
+    return typesList[type] || typesList['default']
 }
