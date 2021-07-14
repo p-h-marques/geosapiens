@@ -7,6 +7,7 @@ export const initialState = {
     formInfo: {},
     formStructure: [],
     formAnswer: {},
+    formErrors: {},
     appStatus: {
         loading: true,
         error: false

@@ -30,3 +30,12 @@ export function clearFormAnswers(answers){
         payload: answers
     }
 }
+
+export function updateFormError(field, value){
+    return {
+        type: types.UPDATE_FORM_ERROR,
+        payload: {
+            field, value
+        }
+    }
+}

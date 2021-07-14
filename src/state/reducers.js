@@ -32,6 +32,15 @@ function reducer(state, action) {
                 }
             }
 
+        case types.UPDATE_FORM_ERROR:
+            return {
+                ...state,
+                formErrors: {
+                    ...state.formErrors,
+                    [action.payload.field]: action.payload.value
+                }
+            }
+
         case types.CLEAR_FORM_ANSWERS:
             return {
                 ...state,
