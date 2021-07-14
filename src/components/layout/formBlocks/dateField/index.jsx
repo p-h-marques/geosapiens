@@ -1,17 +1,21 @@
-import React, { useState, forwardRef } from 'react'
+import React, { useContext, forwardRef } from 'react'
 import { DateFieldStyles } from './styles'
 
 import DatePicker, { registerLocale } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import pt from 'date-fns/locale/pt'
 
+import Context from '../../../../state/Context'
+import * as actions from '../../../../state/actions'
+
 registerLocale('pt-BR', pt)
 
 import ImgCalendar from '../../../../assets/images/calendar.svg'
 
-const DateField = () => {
+const DateField = (props) => {
     const dateFormat = 'dd/MM/yyyy'
-    const [datefield, setDatefield] = useState(new Date())
+
+    const {state, dispatch} = useContext(Context)
 
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <span onClick={onClick} ref={ref}>
@@ -25,8 +29,8 @@ const DateField = () => {
 
             <DatePicker
                 dateFormat={dateFormat}
-                selected={datefield}
-                onChange={date => setDatefield(date)}
+                selected={state.formAnswer[props.componentId]}
+                onChange={date => dispatch(actions.updateFormAnswer(date, props.componentId))}
                 locale="pt-BR"
                 customInput={<ExampleCustomInput />}
                 showYearDropdown

@@ -60,7 +60,7 @@ function getDefaultValues(type){
         textfield:     ' ',
         checkboxfield: [],
         ratingfield:   3,
-        datefield:     new Date().toLocaleDateString('pt-BR', localeDateOptions),
+        datefield:     new Date(),
         urlfield:      ' ',
         default:       null
     }
