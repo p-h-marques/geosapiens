@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect} from 'react'
+import React, {useCallback, useContext} from 'react'
 import { CheckboxFieldStyles } from './styles'
 
 import Context from '../../../../state/Context'
@@ -6,11 +6,6 @@ import * as actions from '../../../../state/actions'
 
 const CheckboxField = (props) => {
     const {state, dispatch} = useContext(Context)
-    const data = state.formAnswer[props.componentId]
-
-    useEffect(()=>{
-        console.log(data)
-    }, [state.formAnswer[props.componentId]])
 
     const handleSelectCheckbox = useCallback((option, status) => {
         const newData = [...state.formAnswer[props.componentId]]
@@ -37,7 +32,7 @@ const CheckboxField = (props) => {
                             type="checkbox"
                             value={option}
                             id={option}
-                            checked={data.includes(option)}
+                            checked={state.formAnswer[props.componentId].includes(option)}
                             onChange={(e)=>{handleSelectCheckbox(option, e.target.checked)}}
                         />
                         <label htmlFor={option}>{option}</label>

@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { RatingFieldStyles } from './styles'
 import ReactStars from 'react-rating-stars-component'
+
+import Context from '../../../../state/Context'
+import * as actions from '../../../../state/actions'
 
 export const feedbacks = [
     'Péssimo!',
@@ -11,21 +14,25 @@ export const feedbacks = [
     'Excelente!'
 ]
 
-const RatingField = () => {
-    const [rating, setRating] = useState(0)
+const RatingField = (props) => {
+    const {state, dispatch} = useContext(Context)
+
+    useEffect(()=>{
+        console.log(state.formAnswer[props.componentId])
+    }, [state, dispatch])
 
     return (
         <RatingFieldStyles>
             <ReactStars
                 size={32}
                 isHalf={false}
-                value={rating}
+                value={state.formAnswer[props.componentId]}
                 edit={true}
-                onChange={setRating}
+                onChange={(e)=> dispatch(actions.updateFormAnswer(e, props.componentId))}
             />
 
             <span className="feedback">
-                {feedbacks[rating]}
+                {feedbacks[state.formAnswer[props.componentId]]}
             </span>
         </RatingFieldStyles>
     )
