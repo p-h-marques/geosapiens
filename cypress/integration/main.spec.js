@@ -2,11 +2,35 @@
 
 import locators from '../support/locators'
 import { feedbacks } from '../../src/components/layout/formBlocks/ratingField'
-import { localeDateOptions } from '../../src/utils/requests'
 
 const domain = 'http://localhost:3000'
 
+describe('validando navegação entre páginas', ()=>{
+    it('visitando domínio principal e redirecionando para adição de registro', ()=>{
+        cy.visit(domain)
+        cy.url().should('contain', 'insert')
+    })
 
+    it('validando quantidade, navegação e aparência dos links', ()=>{
+        cy.get(locators.links.insert).should('exist')
+            .should('have.class', 'active')
+
+        cy.get(locators.links.read).should('exist')
+            .should('not.have.class', 'active')
+            .click()
+
+        cy.url().should('contain', 'read')
+
+        cy.get(locators.links.read).should('exist')
+            .should('have.class', 'active')
+
+        cy.get(locators.links.insert).should('exist')
+            .should('not.have.class', 'active')
+            .click()
+
+        cy.url().should('contain', 'insert')
+    })
+})
 
 describe('exibindo informações do formulário para preenchimento', ()=>{
     beforeEach(()=>{
@@ -15,7 +39,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
     })
 
     it('validando informações principais', ()=>{
-        cy.get(locators.formInfos.title).should('contain', 'Filmes Preferidos')
+        cy.get(locators.formInfos.title, {timeout: 1000000}).should('contain', 'Filmes Preferidos')
         cy.get(locators.formInfos.status).should('not.contain', 'inativo')
         cy.get(locators.formInfos.tracking).should('contain', 'Armazenando')
         cy.get(locators.formInfos.public).should('contain', 'público')
@@ -150,5 +174,112 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
         cy.get(locators.feedbacks.loading).should('exist')
         cy.wait('@request')
         cy.get(locators.feedbacks.error).should('exist')
+    })
+})
+
+describe('testando validações dos campos', ()=>{
+    before(()=>{
+        cy.visit(domain)
+        cy.url().should('contain', 'insert')
+    })
+
+    it('iniciando página', ()=>{
+        cy.get(locators.formInfos.title, {timeout: 1000000}).should('contain', 'Filmes Preferidos')
+        cy.get(locators.formInfos.status).should('not.contain', 'inativo')
+        cy.get(locators.formInfos.tracking).should('contain', 'Armazenando')
+        cy.get(locators.formInfos.public).should('contain', 'público')
+    })
+
+    it('tentando submeter sem preencher nenhuma informação', ()=>{
+        cy.get(locators.actions.apply).click()
+
+        cy.get(locators.formBlocks.textField + ' > span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido corretamente!')
+
+        cy.get(locators.formBlocks.checkboxField + ' .errors span')
+            .should('be.visible')
+            .should('contain', 'Pelo menos uma seleção deve ser feita!')
+
+        cy.get(locators.formBlocks.urlField + ' > span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+    })
+
+    it('corrigindo o nome do filme', ()=>{
+        cy.get(locators.formBlocks.textField + ' input').type('Whiplash')
+
+        cy.get(locators.actions.apply).click()
+
+        cy.get(locators.formBlocks.checkboxField + ' .errors span')
+            .should('be.visible')
+            .should('contain', 'Pelo menos uma seleção deve ser feita!')
+
+        cy.get(locators.formBlocks.urlField + ' > span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+    })
+
+    it('selecionando algumas categorias', ()=>{
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Drama"]').click()
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Musical"]').click()
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Suspense"]').click()
+
+        cy.get(locators.actions.apply).click()
+
+        cy.get(locators.formBlocks.urlField + ' > span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+    })
+
+    it('inserindo urls inválidas e válidas', ()=>{
+        cy.get(locators.formBlocks.urlField + ' input').type('url inválida').blur()
+        cy.get(locators.formBlocks.urlField + ' .error span')
+            .should('be.visible')
+            .should('contain', 'Este campo precisa ser preenchido com uma URL válida!')
+
+        cy.get(locators.formBlocks.urlField + ' input')
+            .type('{selectAll}https://www.imdb.com/title/tt2582802').blur()
+
+        cy.get(locators.formBlocks.urlField + ' .error span')
+            .should('not.exist')
+    })
+
+    it('clicando no botão limpar', ()=>{
+        cy.get(locators.actions.clear).click()
+
+        cy.get(locators.formBlocks.textField + ' input').should('have.value', '')
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input').each($el => {
+            cy.wrap($el).should('not.be.checked')
+        })
+        cy.get(locators.formBlocks.urlField + ' input').should('have.value', '')
+    })
+
+    it('preenchendo e enviando o formulário', ()=>{
+        cy.get(locators.formBlocks.textField + ' input').type('Whiplash')
+
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Drama"]').click()
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Musical"]').click()
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input[value="Suspense"]').click()
+
+        cy.get(locators.formBlocks.urlField + ' input')
+            .type('{selectAll}https://www.imdb.com/title/tt2582802').blur()
+
+        cy.get(locators.actions.apply).click()
+    })
+
+    it('verificando feedback de sucesso', ()=>{
+        cy.get(locators.feedbacks.success).should('exist')
+        cy.get(locators.feedbacks.success + ' h3').should('contain', 'Dados enviados!')
+        cy.get(locators.feedbacks.success + ' p').should('contain', 'retornar ao formulário')
+        cy.get(locators.feedbacks.successButton).should('exist').click()
+    })
+
+    it('verificando formulário vazio após o envio', ()=>{
+        cy.get(locators.formBlocks.textField + ' input').should('have.value', '')
+        cy.get(locators.formBlocks.checkboxField + ' [data-test=form-check] input').each($el => {
+            cy.wrap($el).should('not.be.checked')
+        })
+        cy.get(locators.formBlocks.urlField + ' input').should('have.value', '')
     })
 })

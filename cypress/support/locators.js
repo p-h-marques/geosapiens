@@ -24,6 +24,13 @@ const locators = {
     feedbacks: {
         loading: '[data-test=request-loading]',
         error: '[data-test=request-error]',
+        success: '[data-test=request-sending]',
+        successButton: '[data-test=button-return]'
+    },
+    actions: {
+        clear: '[data-test=button-clear]',
+        apply: '[data-test=button-send]',
+        return: '[data-test=button-return]'
     }
 }
 
