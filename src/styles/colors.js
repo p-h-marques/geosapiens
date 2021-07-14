@@ -6,7 +6,8 @@ const colors = {
     background: '#DDF5F0',
     backgroundHover: '#B0FEEE',
     light: '#FFFFFF',
-    danger: '#EC1616'
+    danger: '#EC1616',
+    overlay: 'rgba(31, 45, 48, 0.88)'
 }
 
 export default colors

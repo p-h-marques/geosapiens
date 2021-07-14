@@ -19,6 +19,7 @@ const CheckboxField = (props) => {
         }
 
         dispatch(actions.updateFormAnswer(newData, props.componentId))
+        dispatch(actions.updateFormError(props.componentId, false))
 
     }, [state.formAnswer[props.componentId]])
 

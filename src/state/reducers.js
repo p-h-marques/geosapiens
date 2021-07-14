@@ -58,6 +58,15 @@ function reducer(state, action) {
                 }
             }
 
+        case types.HANDLE_SEND_FEEDBACK:
+            return {
+                ...state,
+                appStatus: {
+                    ...state.appStatus,
+                    send: action.payload
+                }
+            }
+
         default:
             throw new Error()
     }

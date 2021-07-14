@@ -10,7 +10,8 @@ export const initialState = {
     formErrors: {},
     appStatus: {
         loading: true,
-        error: false
+        error: false,
+        send: false
     }
 }
 

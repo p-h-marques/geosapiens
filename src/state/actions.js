@@ -1,5 +1,7 @@
 import * as types from './types'
 
+import {getDefaultValues} from '../utils/requests'
+
 export async function updateInitialData(data){
     return {
         type: types.UPDATE_INITIAL_DATA,
@@ -24,7 +26,18 @@ export function updateFormAnswer(value, type){
     }
 }
 
-export function clearFormAnswers(answers){
+export function clearFormAnswers(state){
+    let answers = {...state.formAnswer}
+
+    for(const field in state.formAnswer){
+        const typeField = state.formStructure
+            .filter(block => block.componentId === field)[0].type
+
+        const defaultValue = getDefaultValues(typeField)
+
+        answers[field] = defaultValue
+    }
+
     return {
         type: types.CLEAR_FORM_ANSWERS,
         payload: answers
@@ -54,5 +67,12 @@ export function updateMultipleFormErrors(fields){
     return {
         type: types.UPDATE_MULTIPLE_ERRORS,
         payload: mapping
+    }
+}
+
+export function handleSendFeedback(send){
+    return {
+        type: types.HANDLE_SEND_FEEDBACK,
+        payload: send
     }
 }

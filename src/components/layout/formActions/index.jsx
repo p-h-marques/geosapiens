@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react'
 import {FormActionsStyles} from './styles'
+import Button from '../button'
 
 import Context from '../../../state/Context'
 import * as actions from '../../../state/actions'
@@ -11,19 +12,8 @@ const FormActions = () => {
     const {state, dispatch} = useContext(Context)
 
     const handleClearButton = useCallback(()=>{
-        let answers = {...state.formAnswer}
-
-        for(const field in state.formAnswer){
-            const typeField = state.formStructure
-                .filter(block => block.componentId === field)[0].type
-
-            const defaultValue = getDefaultValues(typeField)
-
-            answers[field] = defaultValue
-        }
-
-        dispatch(actions.clearFormAnswers(answers))
-    }, [state, dispatch, actions])
+        dispatch(actions.clearFormAnswers(state))
+    }, [state, dispatch])
 
     const handleApplyButton = useCallback(()=>{
         function getRequiredFields(structure){
@@ -54,38 +44,43 @@ const FormActions = () => {
          * - - ser tiver campos obrigatórios, lançar erros no objeto global
          * - criar objeto para salvar
          * - exibir alerta
+         * - - parâmetro do objeto global com status de envio
+         * - - mudar ele pra true, e dar um console log na resposta
+         * - - ao clicar em preencher de novo, limpar campos e fechar alerta
          */
 
         const requireds = getRequiredFields(state.formStructure)
         const alerts = assertRequiredFields(requireds, state.formAnswer)
-
-        console.log(alerts)
 
         if(alerts.length > 0) {
             dispatch(actions.updateMultipleFormErrors(alerts))
             return false
         }
 
-        console.log('enviar')
+        console.log('enviar dados aqui!')
+        console.log(state.formAnswer)
+
+        dispatch(actions.handleSendFeedback(true))
         return true
     }, [state])
 
     return (
         <FormActionsStyles>
-            <button className="secondary"
-                data-test="button-clear"
-                onClick={handleClearButton}
+            <Button
+                type="secondary"
+                test="button-clear"
+                action={handleClearButton}
             >
                 Limpar
-            </button>
+            </Button>
 
-            <button className="primary"
-                data-test="button-send"
-                onClick={handleApplyButton}
+            <Button
+                type="primary"
+                test="button-send"
+                action={handleApplyButton}
             >
-
                 Enviar
-            </button>
+            </Button>
         </FormActionsStyles>
     )
 }

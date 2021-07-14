@@ -14,6 +14,7 @@ import DateField from '../../components/layout/formBlocks/dateField'
 import UrlField from '../../components/layout/formBlocks/urlField'
 import Loading from '../../components/layout/loading'
 import Error from '../../components/layout/error'
+import Send from '../../components/layout/send'
 
 const Form = () => {
     const {state, dispatch} = useContext(Context)
@@ -50,6 +51,8 @@ const Form = () => {
             {state.appStatus.loading && (<Loading />)}
 
             {state.appStatus.error && (<Error />)}
+
+            {state.appStatus.send && (<Send />)}
 
             {
                 !state.appStatus.loading &&
