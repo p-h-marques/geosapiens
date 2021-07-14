@@ -23,3 +23,10 @@ export function updateFormAnswer(value, type){
         },
     }
 }
+
+export function clearFormAnswers(answers){
+    return {
+        type: types.CLEAR_FORM_ANSWERS,
+        payload: answers
+    }
+}

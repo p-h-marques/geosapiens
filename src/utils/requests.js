@@ -55,7 +55,7 @@ function getComponentsId(structure){
     return answers
 }
 
-function getDefaultValues(type){
+export function getDefaultValues(type){
     const typesList = {
         textfield:     ' ',
         checkboxfield: [],

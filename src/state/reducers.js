@@ -32,6 +32,14 @@ function reducer(state, action) {
                 }
             }
 
+        case types.CLEAR_FORM_ANSWERS:
+            return {
+                ...state,
+                formAnswer: {
+                    ...action.payload
+                }
+            }
+
         default:
             throw new Error()
     }
