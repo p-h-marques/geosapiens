@@ -9,6 +9,10 @@ import Button from '../button'
 const Send = () => {
     const {state, dispatch} = useContext(Context)
 
+    /**
+     * Limpa objeto global relativo ao preenchimento do formulário
+     * e retorna ao formulário vazio.
+     */
     const handleReturnButton = useCallback(()=>{
         dispatch(actions.clearFormAnswers(state))
         dispatch(actions.handleSendFeedback(false))

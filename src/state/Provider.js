@@ -2,7 +2,6 @@ import React, { useReducer } from 'react'
 import Context from './Context'
 import reducer from './reducers'
 
-
 export const initialState = {
     formInfo: {},
     formStructure: [],

@@ -1,3 +1,9 @@
+/**
+ * Verifica se determinada string é uma URL válida.
+ *
+ * @param {string} str String a ser verificada
+ * @returns {boolean}
+ */
 export function validURL(str) {
     let pattern = new RegExp(
         '^(https?:\\/\\/)?' +
@@ -12,6 +18,13 @@ export function validURL(str) {
     return !!pattern.test(str)
 }
 
+/**
+ * Compara se dois arrays são iguais entre si.
+ *
+ * @param {array} arrA Array a ser comparado.
+ * @param {array} arrB Array a ser comparado
+ * @returns {boolean}
+ */
 export function isEqualArrays(arrA, arrB){
     if (!arrA || !arrB) return false
 

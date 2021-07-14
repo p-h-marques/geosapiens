@@ -7,6 +7,10 @@ import * as actions from '../../../../state/actions'
 const CheckboxField = (props) => {
     const {state, dispatch} = useContext(Context)
 
+    /**
+     * Manipula se opção em questão será incluída ou
+     * excluída do objeto de estado global.
+     */
     const handleSelectCheckbox = useCallback((option, status) => {
         const newData = [...state.formAnswer[props.componentId]]
 

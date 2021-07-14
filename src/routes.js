@@ -13,10 +13,6 @@ function RoutesList() {
                     <Form />
                 </Route>
 
-                <Route exact path="/read">
-                    <div>ler</div>
-                </Route>
-
                 <Route exact path="*">
                     <Redirect to="/insert" />
                 </Route>

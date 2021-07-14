@@ -4,51 +4,25 @@ import Button from '../button'
 
 import Context from '../../../state/Context'
 import * as actions from '../../../state/actions'
-
-import { getDefaultValues } from '../../../utils/requests'
-import {isEqualArrays} from '../../../utils/validations'
+import {assertRequiredFields, getRequiredFields} from '../../../utils/manipulations'
 
 const FormActions = () => {
     const {state, dispatch} = useContext(Context)
 
+    /**
+     * Limpa as informações do formulário
+     */
     const handleClearButton = useCallback(()=>{
         dispatch(actions.clearFormAnswers(state))
     }, [state, dispatch])
 
+    /**
+     * Analisa campos obrigatórios e faz o submit do formulário
+     *
+     * ! Atualmente a parte de submissão está apenas com um console.log.
+     *
+     */
     const handleApplyButton = useCallback(()=>{
-        function getRequiredFields(structure){
-            return structure.filter(field => {
-                return field.minimum.value === 0 && !['ratingfield', 'datefield'].includes(field.type)
-            })
-        }
-
-        function assertRequiredFields(requireds, answers){
-            let alerts = []
-
-            requireds.forEach(required => {
-                const defaultValue = getDefaultValues(required.type)
-
-                if(
-                    defaultValue === answers[required.componentId] ||
-                    isEqualArrays(defaultValue, answers[required.componentId])
-                ){
-                    alerts.push(required.componentId)
-                }
-            })
-
-            return alerts
-        }
-
-        /**
-         * - verificar campos obrigatórios
-         * - - ser tiver campos obrigatórios, lançar erros no objeto global
-         * - criar objeto para salvar
-         * - exibir alerta
-         * - - parâmetro do objeto global com status de envio
-         * - - mudar ele pra true, e dar um console log na resposta
-         * - - ao clicar em preencher de novo, limpar campos e fechar alerta
-         */
-
         const requireds = getRequiredFields(state.formStructure)
         const alerts = assertRequiredFields(requireds, state.formAnswer)
 
@@ -61,6 +35,7 @@ const FormActions = () => {
         console.log(state.formAnswer)
 
         dispatch(actions.handleSendFeedback(true))
+
         return true
     }, [state])
 

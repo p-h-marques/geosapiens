@@ -9,6 +9,11 @@ import * as actions from '../../../../state/actions'
 const UrlField = props => {
     const {state, dispatch} = useContext(Context)
 
+    /**
+     * Analisa se campo está preenchido com uma URL válida,
+     * no momento de blur do campo, e veicula
+     * os feedbacks apropriados.
+     */
     const handleInputError = useCallback(() => {
         if ((
             state.formAnswer[props.componentId].length === 0 &&
@@ -22,6 +27,10 @@ const UrlField = props => {
 
     }, [state.formAnswer[props.componentId]])
 
+    /**
+     * Remove possíveis mensagens de erro e atualiza
+     * estado global conforme digitação acontece
+     */
     const handleInputChange = useCallback(
         text => {
             dispatch(actions.updateFormError(props.componentId, false))

@@ -35,3 +35,22 @@ npm run test
 Entre features propostas de forma obrigatória & opcional pela especificação, o seguinte foi viabilizado:
 
 - [...]
+
+## Processo de desenvolvimento
+
+- Prototipação
+- Desenvolvimento
+- - Container pra encapsular as infos
+- - Inversão de obrigatoriedade
+- - Validação com campos padrão
+- - Submissão apenas pelo console
+- - Objeto global e suas descrições
+- - Dinamismo dos campos do formulário - getTypeBlock
+- - Feedbacks de carregamento, erro e sucesso
+- - Requisições simultâneas no início da página
+- Testes
+- Revisão de documentação e organização de código
+- Possíveis melhorias
+- - Testes unitários
+- - Dinamizar formulário a ser pesquisado
+- - Desenvolver segunda tela

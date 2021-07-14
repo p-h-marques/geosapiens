@@ -19,6 +19,13 @@ import Send from '../../components/layout/send'
 const Form = () => {
     const {state, dispatch} = useContext(Context)
 
+    /**
+     * Obtém o componente de formulário de acordo com o tipo de campo passado.
+     *
+     * @param {string} type Tipo de campo
+     * @param {object} props Propriedades a serem passadas ao componente retornado
+     * @returns {Component} Componente correspondente ao tipo de campo passado.
+     */
     function getTypeBlock(type, props) {
         const typesList = {
             textfield:      (<TextField key={props.componentId} {...props}/>),
@@ -32,6 +39,9 @@ const Form = () => {
         return typesList[type] || typesList['default']
     }
 
+    /**
+     * Faz a requisição inicial da página, com a estrutura do formulário.
+     */
     useEffect(async ()=>{
         const initialData = await getInitialData()
 
@@ -41,10 +51,6 @@ const Form = () => {
             dispatch(actions.handleErrorStatus(true))
         }
     }, [])
-
-    useEffect(()=>{
-        // console.log(state)
-    }, [state])
 
     return (
         <FormStyles>

@@ -9,11 +9,7 @@ const Header = () => {
         {
             name: 'Preencher formulário',
             url: '/insert',
-        },
-        {
-            name: 'Visualizar respostas',
-            url: '/read',
-        },
+        }
     ]
 
     const actualRoute = useLocation()

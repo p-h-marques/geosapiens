@@ -15,19 +15,6 @@ describe('validando navegação entre páginas', ()=>{
         cy.get(locators.links.insert).should('exist')
             .should('have.class', 'active')
 
-        cy.get(locators.links.read).should('exist')
-            .should('not.have.class', 'active')
-            .click()
-
-        cy.url().should('contain', 'read')
-
-        cy.get(locators.links.read).should('exist')
-            .should('have.class', 'active')
-
-        cy.get(locators.links.insert).should('exist')
-            .should('not.have.class', 'active')
-            .click()
-
         cy.url().should('contain', 'insert')
     })
 })
