@@ -42,7 +42,7 @@ const FormActions = () => {
                     defaultValue === answers[required.componentId] ||
                     isEqualArrays(defaultValue, answers[required.componentId])
                 ){
-                    alerts.push(required)
+                    alerts.push(required.componentId)
                 }
             })
 
@@ -59,7 +59,7 @@ const FormActions = () => {
         const requireds = getRequiredFields(state.formStructure)
         const alerts = assertRequiredFields(requireds, state.formAnswer)
 
-        alerts.forEach(alert => console.log(alert))
+        if(alerts.length > 0) dispatch(actions.updateMultipleFormErrors(alerts))
     }, [state.formAnswer])
 
     return (

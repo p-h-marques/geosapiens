@@ -1,6 +1,8 @@
 import * as types from './types'
 
 function reducer(state, action) {
+    console.log(action)
+
     switch (action.type) {
         case types.UPDATE_INITIAL_DATA:
             return {
@@ -38,6 +40,15 @@ function reducer(state, action) {
                 formErrors: {
                     ...state.formErrors,
                     [action.payload.field]: action.payload.value
+                }
+            }
+
+        case types.UPDATE_MULTIPLE_ERRORS:
+            return {
+                ...state,
+                formErrors: {
+                    ...state.formErrors,
+                    ...action.payload
                 }
             }
 

@@ -39,3 +39,20 @@ export function updateFormError(field, value){
         }
     }
 }
+
+export function updateMultipleFormErrors(fields){
+    const updates = fields.map(field => {
+        return {[field]: true}
+    })
+
+    let mapping = {}
+
+    updates.forEach(update => {
+        mapping[Object.keys(update)[0]] = update[Object.keys(update)[0]]
+    })
+
+    return {
+        type: types.UPDATE_MULTIPLE_ERRORS,
+        payload: mapping
+    }
+}
