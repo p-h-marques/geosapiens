@@ -3,7 +3,7 @@
 import locators from '../support/locators'
 import { feedbacks } from '../../src/components/layout/formBlocks/ratingField'
 
-const domain = 'http://localhost:3000'
+const domain = 'https://geosapiensform.web.app'
 
 describe('validando navegação entre páginas', ()=>{
     it('visitando domínio principal e redirecionando para adição de registro', ()=>{

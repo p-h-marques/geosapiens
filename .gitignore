@@ -25,3 +25,6 @@ yarn-error.log*
 #add
 package-lock.json
 .vscode
+
+# firebase
+/.firebase
