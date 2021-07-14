@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { RatingFieldStyles } from './styles'
 import ReactStars from 'react-rating-stars-component'
 
@@ -16,10 +16,6 @@ export const feedbacks = [
 
 const RatingField = (props) => {
     const {state, dispatch} = useContext(Context)
-
-    useEffect(()=>{
-        console.log(state.formAnswer[props.componentId])
-    }, [state, dispatch])
 
     return (
         <RatingFieldStyles>

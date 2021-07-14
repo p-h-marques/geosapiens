@@ -26,7 +26,7 @@ const TextField = (props) => {
             <input
                 type="text"
                 onBlur={handleInputError}
-                value={input}
+                value={input.trim()}
                 onChange={e => {handleInputChange(e.target.value)}}
             />
             <span>Este campo precisa ser preenchido corretamente!</span>

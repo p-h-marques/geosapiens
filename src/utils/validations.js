@@ -11,3 +11,20 @@ export function validURL(str) {
 
     return !!pattern.test(str)
 }
+
+export function isEqualArrays(arrA, arrB){
+    if (!arrA || !arrB) return false
+
+    if (arrA.length != arrB.length) return false
+
+    for (let i = 0, l = arrA.length; i < l; i++) {
+        if (arrA[i] instanceof Array && arrB[i] instanceof Array) {
+            if (!isEqualArrays(arrA[i], arrB[i])) return false
+
+        } else if (arrA[i] != arrB[i]) {
+            return false
+        }
+    }
+
+    return true
+}

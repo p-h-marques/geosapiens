@@ -5,6 +5,7 @@ import Context from '../../../state/Context'
 import * as actions from '../../../state/actions'
 
 import { getDefaultValues } from '../../../utils/requests'
+import {isEqualArrays} from '../../../utils/validations'
 
 const FormActions = () => {
     const {state, dispatch} = useContext(Context)
@@ -24,6 +25,41 @@ const FormActions = () => {
         dispatch(actions.clearFormAnswers(answers))
     }, [state, dispatch, actions])
 
+    const handleApplyButton = useCallback(()=>{
+        function getRequiredFields(structure){
+            return structure.filter(field => {
+                return field.minimum.value === 0
+            })
+        }
+
+        function assertRequiredFields(requireds, answers){
+            let alerts = []
+
+            requireds.forEach(required => {
+                const defaultValue = getDefaultValues(required.type)
+
+                if(
+                    defaultValue === answers[required.componentId] ||
+                    isEqualArrays(defaultValue, answers[required.componentId])
+                ){
+                    alerts.push(required)
+                }
+            })
+
+            return alerts
+        }
+
+        /**
+         * - verificar campos obrigatórios
+         * - - ser tiver campos obrigatórios, lançar erros no objeto global
+         * - criar objeto para salvar
+         * - exibir alerta
+         */
+        const requireds = getRequiredFields(state.formStructure)
+        const alerts = assertRequiredFields(requireds, state.formAnswer)
+        console.log(alerts)
+    }, [])
+
     return (
         <FormActionsStyles>
             <button className="secondary"
@@ -34,7 +70,9 @@ const FormActions = () => {
             </button>
 
             <button className="primary"
-                data-test="button-send">
+                data-test="button-send"
+                onClick={handleApplyButton}
+            >
 
                 Enviar
             </button>

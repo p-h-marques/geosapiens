@@ -40,7 +40,7 @@ const UrlField = props => {
             <input
                 type="text"
                 onBlur={handleInputError}
-                value={state.formAnswer[props.componentId]}
+                value={state.formAnswer[props.componentId].trim()}
                 onChange={e => {
                     handleInputChange(e.target.value)
                 }}
