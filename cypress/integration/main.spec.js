@@ -26,7 +26,7 @@ describe('exibindo informações do formulário para preenchimento', ()=>{
     })
 
     it('validando informações principais', ()=>{
-        cy.get(locators.formInfos.title, {timeout: 1000000}).should('contain', 'Filmes Preferidos')
+        cy.get(locators.formInfos.title, {timeout: 100000}).should('contain', 'Filmes Preferidos')
         cy.get(locators.formInfos.status).should('not.contain', 'inativo')
         cy.get(locators.formInfos.tracking).should('contain', 'Armazenando')
         cy.get(locators.formInfos.public).should('contain', 'público')
